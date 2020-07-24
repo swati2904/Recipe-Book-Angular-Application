@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
+import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -36,13 +37,20 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         });
   }
 
-  onAddItem(form: NgForm) {
+  onSubmit(form: NgForm) {
     const value = form.value
     // const ingName = this.nameInputRef.nativeElement.value;
     // const ingAmount = this.amountInputRef.nativeElement.value;
     const newIngredient = new Ingredient(value.name, value.amount);
+    if(this.editMode){
+      this.slService.updateIngredient(this.editedItemIndex, newIngredient);
+    }else{
+      this.slService.addIngredient(newIngredient);
+   }
+   this.editMode = false;
+   form.reset();
+    
     // this.ingredientAdded.emit(newIngredient);
-    this.slService.addIngredient(newIngredient);
   }
 
   ngOnDestroy() {
