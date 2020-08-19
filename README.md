@@ -3,7 +3,7 @@
 * Project completed within a week.
 * User can create or add their own recipes in the recipe book. which helps to other who are new in the cooking or those who wants to follow their passion.
 
-# Read Some Important to points
+# Read Some Important points
 
 * This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
